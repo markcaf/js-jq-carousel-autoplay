@@ -7,7 +7,7 @@ const images = [
     'https://mymodernmet.com/wp/wp-content/uploads/2020/02/Landscape-Photographer-of-the-Year-Sander-Grefte.jpg'
     ];
 
-let activeImageIndex = 4;
+let activeImageIndex = 0;
 
 // recupero il parent all'interno del quale inserire le immagini
 const imagesWrapper = document.querySelector('.carousel-wrapper .carousel-image-container');
@@ -92,3 +92,22 @@ prevButton.addEventListener('click', function(){
     imageElements[activeImageIndex].classList.add('active');
     thumbnailElements[activeImageIndex].classList.add('active');
 });
+
+// Aggiungo la costante autoplay per scorrere le immagini del carousel in automatico ogni 4 secondi
+const autoplay = setInterval(function () {
+    // prendo l'immagine attiva =>  .carousel-image-container img.active
+    imageElements[activeImageIndex].classList.remove('active');
+    thumbnailElements[activeImageIndex].classList.remove('active');
+
+    //  activeImageIndex = activeImageIndex + 1;
+    activeImageIndex++;
+
+    // se arrivo alla fine della lista ricomincio da zero
+    if (activeImageIndex === images.length) {
+        activeImageIndex = 0;
+    }
+
+    // prendo l'immagine all'indice attuale e le aggiungo la classe active per renderla visibile
+    imageElements[activeImageIndex].classList.add('active');
+    thumbnailElements[activeImageIndex].classList.add('active');
+    }, 3000);
